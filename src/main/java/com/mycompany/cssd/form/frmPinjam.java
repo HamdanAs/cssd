@@ -5,6 +5,7 @@
  */
 package com.mycompany.cssd.form;
 
+import com.mycompany.cssd.utility.Date;
 import com.mycompany.cssd.utility.Table;
 
 /**
@@ -27,6 +28,9 @@ public class frmPinjam extends javax.swing.JFrame {
         table = new Table(tblData);
         table.setColumn(new String[] {"Kode Item", "Nama Item", "Qty"});
         table.setColumnWidth(718, 15, 75, 10);
+        
+        tPeminjaman.setText(Date.now());
+        tPengembalian.setText(Date.plusTwo());
     }
     
     private void addRow(){
@@ -87,7 +91,7 @@ public class frmPinjam extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -132,6 +136,7 @@ public class frmPinjam extends javax.swing.JFrame {
         tNoPeminjaman.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         tNoPeminjaman.setForeground(new java.awt.Color(118, 97, 97));
 
+        tPengembalian.setEditable(false);
         tPengembalian.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         tPengembalian.setForeground(new java.awt.Color(118, 97, 97));
 
@@ -160,6 +165,7 @@ public class frmPinjam extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(225, 241, 221));
         jLabel12.setText("Qty");
 
+        tPeminjaman.setEditable(false);
         tPeminjaman.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         tPeminjaman.setForeground(new java.awt.Color(118, 97, 97));
 
@@ -181,9 +187,10 @@ public class frmPinjam extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
@@ -193,7 +200,7 @@ public class frmPinjam extends javax.swing.JFrame {
                                     .addComponent(tNama)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(0, 288, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tQty)
@@ -213,8 +220,7 @@ public class frmPinjam extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(tPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(tPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(44, 44, 44))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(44, 69, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(

@@ -18,6 +18,15 @@ public class Table {
         table.setModel(model);
     }
     
+    public Table(){
+       this.model = new DefaultTableModel();
+    }
+    
+    public void setTable(JTable table){
+        this.table = table;
+        table.setModel(model);
+    }
+    
     public void setColumn(String[] colName){
         int colLength = colName.length;
         for (int i = 0; i < colLength; i++){

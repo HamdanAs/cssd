@@ -5,32 +5,70 @@
  */
 package com.mycompany.cssd.form;
 
+import com.mycompany.cssd.database.Database;
+import com.mycompany.cssd.models.AlatModel;
+import com.mycompany.cssd.models.Model;
 import com.mycompany.cssd.utility.Date;
 import com.mycompany.cssd.utility.Table;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
  * @author NESAS
  */
-public class frmPinjam extends javax.swing.JFrame {
+public class frmPinjam extends javax.swing.JFrame{
 
     private Table table;
+    private Database db;
     
-    public frmPinjam() {
+    private ResultSet rs;
+    private Model alatModel;
+    
+    public frmPinjam() throws SQLException {
         initComponents();
         
         init();
     }
     
-    private void init(){
+    private void init() throws SQLException{
         setLocationRelativeTo(null);
         
+//        Table
         table = new Table(tblData);
         table.setColumn(new String[] {"Kode Item", "Nama Item", "Qty"});
         table.setColumnWidth(718, 15, 75, 10);
         
         tPeminjaman.setText(Date.now());
         tPengembalian.setText(Date.plusTwo());
+        
+//        Database
+//        db = new Database();
+//        db.query("select idbarang, namabarang, jenis from stokgudang");
+//        table.addRow(db.resultSet());
+         
+        showAll();
+    }
+    
+    private void showAll() throws SQLException{
+        db = new Database();
+        db.query("select idbarang, namabarang, jenis from stokgudang");
+        rs = db.execute();
+        
+        while(rs.next()){
+            Object[] data = new Object[3];
+            data[0] = rs.getInt("idbarang");
+            data[1] = rs.getString("namabarang");
+            data[2] = rs.getString("jenis");
+            table.addRow(data);
+        }
+    }
+    
+    private void save() throws SQLException{
+        Model.save();
     }
     
     private void addRow(){
@@ -144,6 +182,11 @@ public class frmPinjam extends javax.swing.JFrame {
         btnSimpan.setForeground(new java.awt.Color(118, 97, 97));
         btnSimpan.setText("Simpan dan Print");
         btnSimpan.setBorder(null);
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(225, 241, 221));
@@ -275,6 +318,14 @@ public class frmPinjam extends javax.swing.JFrame {
         resetInput();
     }//GEN-LAST:event_btnTambahActionPerformed
 
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        try {
+            save();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmPinjam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -302,7 +353,11 @@ public class frmPinjam extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPinjam().setVisible(true);
+                try {
+                    new frmPinjam().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmPinjam.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -329,4 +384,5 @@ public class frmPinjam extends javax.swing.JFrame {
     private javax.swing.JTextField tQty;
     private javax.swing.JTable tblData;
     // End of variables declaration//GEN-END:variables
+
 }

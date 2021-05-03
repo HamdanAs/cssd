@@ -26,15 +26,19 @@ public class Table {
     }
     
     public void setColumnWidth(int tablePreferredWidth, double... percentages){
-            double total = 0;
-            for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
-                total += percentages[i];
-            }
-
-            for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
-                TableColumn column = table.getColumnModel().getColumn(i);
-                column.setPreferredWidth((int)
-                        (tablePreferredWidth * (percentages[i] / total)));
-            }
+        double total = 0;
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            total += percentages[i];
         }
+
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            TableColumn column = table.getColumnModel().getColumn(i);
+            column.setPreferredWidth((int)
+                    (tablePreferredWidth * (percentages[i] / total)));
+        }
+    }
+    
+    public void addRow(Object[] data){
+        model.addRow(data);
+    }
 }

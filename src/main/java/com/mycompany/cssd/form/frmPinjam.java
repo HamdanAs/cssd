@@ -28,6 +28,20 @@ public class frmPinjam extends javax.swing.JFrame {
         table.setColumn(new String[] {"Kode Item", "Nama Item", "Qty"});
         table.setColumnWidth(718, 15, 75, 10);
     }
+    
+    private void addRow(){
+        String kode = tKode.getText();
+        String nama = tNama.getText();
+        String qty = tQty.getText();
+        Object[] data = {kode, nama, qty};
+        table.addRow(data);
+    }
+    
+    private void resetInput(){
+        tKode.setText("");
+        tNama.setText("");
+        tQty.setText("");
+    }
 
    
     @SuppressWarnings("unchecked")
@@ -96,6 +110,11 @@ public class frmPinjam extends javax.swing.JFrame {
         btnTambah.setForeground(new java.awt.Color(118, 97, 97));
         btnTambah.setText("Tambah");
         btnTambah.setBorder(null);
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -244,6 +263,11 @@ public class frmPinjam extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        addRow();
+        resetInput();
+    }//GEN-LAST:event_btnTambahActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

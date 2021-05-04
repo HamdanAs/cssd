@@ -1,20 +1,26 @@
 package com.mycompany.cssd.models;
 
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author NESAS
  */
 public class AlatModel extends Model{
-
-    public AlatModel() {
-        super();
+    
+    public AlatModel() throws SQLException {
         super.table = "stokgudang";
-        super.fillable = new String[]{""};
+        super.fillables = new String[]{"namabarang", "jenis", "tanggalmasuk" ,"stok"};
     }
     
-    public void insert() throws SQLException{
-        Model.save();
+    public String getTable(){
+        return super.table;
+    }
+    
+    public String[] getColumn(){
+        return super.fillables;
     }
 }

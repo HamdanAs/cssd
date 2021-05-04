@@ -3,6 +3,8 @@ package com.mycompany.cssd.models;
 import com.mycompany.cssd.database.Database;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,16 +21,19 @@ public class Model {
             String questionMark = "?";
             db = new Database();
 
-            for (String fillable : fillables) {
+            System.out.println(Arrays.toString(this.fillables));
+            
+            for (String fillable : this.fillables) {
                 questionMark += ",?";
             }
 
             String query = "insert into " + table + " values(" + questionMark + ")";
+            System.out.println(query);
             db.query(query);
             PreparedStatement stmt = db.getStmt();
 
             stmt.setInt(1, 0);
-            for (int i = 1; i <= fillables.length - 1; i++){
+            for (int i = 1; i <= this.fillables.length; i++){
                 stmt.setString(i + 1, data[i - 1]);
             }
 
@@ -37,18 +42,17 @@ public class Model {
             db.getConn().close();
 
             return 1;
-        
         } catch (SQLException e){
             return 0;
         }
     }
     
-    protected int update(String[] data, int id){
+    public int update(String[] data, int id){
         try{
             String dataSection = "";
             db = new Database();
 
-            for (String fillable : fillables) {
+            for (String fillable : this.fillables) {
                 dataSection += ", " + fillable + "=?";
             }
 
@@ -63,10 +67,10 @@ public class Model {
             db.query(query);
             PreparedStatement stmt = db.getStmt();
 
-            for (int i = 1; i <= fillables.length - 1; i++){
+            for (int i = 1; i <= this.fillables.length; i++){
                 stmt.setString(i, data[i - 1]);
             }
-            stmt.setInt(fillables.length - 1, id);
+            stmt.setInt(this.fillables.length + 1, id);
 
             stmt.execute();
 
@@ -74,16 +78,17 @@ public class Model {
             
             return 1;
         } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
             return 0;
         }
 //
     }
     
-    protected int destroy(int id){
+    public int destroy(int id){
         try{
             db = new Database();
             
-            String query = "delete from " + table + "where id = ?";
+            String query = "delete from " + table + " where id = ?";
             db.query(query);
             PreparedStatement stmt = db.getStmt();
             
@@ -94,6 +99,7 @@ public class Model {
             db.getConn().close();
             return 1;
         } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e);
             return 0;
         }
     }

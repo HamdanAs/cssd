@@ -8,11 +8,16 @@ import java.sql.SQLException;
  */
 public class AlatModel extends Model{
     
-    public AlatModel(){
-        
+    public AlatModel() throws SQLException {
+        super.table = "stokgudang";
+        super.fillables = new String[]{"namabarang", "jenis", "tanggalmasuk" ,"stok"};
     }
     
-    public void insert() throws SQLException{
-        Model.save();
+    public String getTable(){
+        return super.table;
+    }
+    
+    public String[] getColumn(){
+        return super.fillables;
     }
 }

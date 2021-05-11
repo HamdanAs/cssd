@@ -5,8 +5,12 @@
  */
 package com.mycompany.cssd.form;
 
+import com.mycompany.cssd.controllers.Controller;
+import com.mycompany.cssd.controllers.RuanganController;
 import com.mycompany.cssd.utility.Table;
-import javax.swing.JPanel;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,24 +22,26 @@ public class frmRuangan extends javax.swing.JFrame {
      * Creates new form frmRuangan
      */
     
-    private Table table;
-    
-    private JPanel[] panels;
-    public frmRuangan() {
+    public frmRuangan() throws SQLException {
         initComponents();
         
         init();
     }
     
-    private void init(){
+    private void init() throws SQLException{
         setLocationRelativeTo(null);
         
 //        Variables
         String[] column = {"ID", "Nama Ruangan", "Status"};        
         
-        table = new Table(tblData);
+//        Table
+        Table table = new Table(tblData);
         table.setColumn(column);
         table.setColumnWidth(742, 10, 70, 20);
+    
+//    Controller
+        Controller controller = new RuanganController(tblData, table);
+        controller.showAll();
     }
 
     /**
@@ -199,7 +205,11 @@ public class frmRuangan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmRuangan().setVisible(true);
+                try {
+                    new frmRuangan().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmRuangan.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

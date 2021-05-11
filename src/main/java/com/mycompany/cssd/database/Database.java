@@ -1,5 +1,6 @@
 package com.mycompany.cssd.database;
 
+import com.mycompany.cssd.utility.Table;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,23 +52,23 @@ public class Database {
         return stmt.getUpdateCount();
     }
     
-    public Object[] resultSet() throws SQLException{
+    public void resultSet(Table table) throws SQLException{
         rs = execute();
         metaData = rs.getMetaData();
         int count = metaData.getColumnCount();
         
+        Object[] data = new Object[count];
+        
         while(rs.next()){
-            Object[] data = new Object[count];
             for(int i = 1; i <= data.length; i++){
                 data[i - 1] = rs.getString(i);
+                System.out.println(rs.getString(i));
             }
             
-            return data;
+            table.addRow(data);
         }
         
         stmt.close();
         conn.close();
-        
-        return null;
     }
 }

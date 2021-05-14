@@ -45,7 +45,7 @@ public class Model {
         }
     }
     
-    public int saveBatch(Table table){
+    public int saveBatch(Table dataTable){
         try {
             String questionMark = "?";
             db = new Database();
@@ -60,14 +60,14 @@ public class Model {
             PreparedStatement stmt = db.getStmt();
 
             for (int i = 1; i <= this.fillables.length; i++){
-                for(int j = 0; j < table.getRowCount(); j++){
-                    String[] tableData = new String[table.getRowCount()];
+                for(int j = 0; j < dataTable.getRowCount(); j++){
+                    String[] tableData = new String[dataTable.getRowCount()];
                     
-                    for(int k = 0; i < table.getColumnCount(); k++){
-                        tableData[i] = (String) table.getColumnValue(j, k);
+                    for(int k = 0; k < dataTable.getColumnCount(); k++){
+                        tableData[j] = (String) dataTable.getColumnValue(j, k);
                     }
                     
-                    stmt.setString(i, tableData[i - 1]);
+                    stmt.setString(i, tableData[j]);
                     stmt.addBatch();
                 }
             }
@@ -78,6 +78,7 @@ public class Model {
 
             return 1;
         } catch (SQLException e){
+            e.printStackTrace();
             return 0;
         }
     }

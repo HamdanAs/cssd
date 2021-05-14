@@ -5,6 +5,8 @@
  */
 package com.mycompany.cssd.form;
 
+import com.mycompany.cssd.controllers.Controller;
+import com.mycompany.cssd.controllers.PinjamanController;
 import com.mycompany.cssd.database.Database;
 import com.mycompany.cssd.models.Model;
 import com.mycompany.cssd.utility.Date;
@@ -14,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,7 @@ public class frmPinjam extends javax.swing.JFrame{
 
     private Table table;
     private Database db;
+    private Controller controller;
     
     private ResultSet rs;
     private Model alatModel;
@@ -45,10 +47,8 @@ public class frmPinjam extends javax.swing.JFrame{
         tPeminjaman.setText(Date.now());
         tPengembalian.setText(Date.plusTwo());
         
-//        Database
-//        db = new Database();
-//        db.query("select idbarang, namabarang, jenis from stokgudang");
-//        table.addRow(db.resultSet());
+//        Controller
+        controller = new PinjamanController(table);
          
     }
     
@@ -182,6 +182,11 @@ public class frmPinjam extends javax.swing.JFrame{
         btnSimpan.setForeground(new java.awt.Color(118, 97, 97));
         btnSimpan.setText("Simpan dan Print");
         btnSimpan.setBorder(null);
+        btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSimpanMouseClicked(evt);
+            }
+        });
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
@@ -325,6 +330,10 @@ public class frmPinjam extends javax.swing.JFrame{
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
         table.removeRow(table.getRowIndex());
     }//GEN-LAST:event_tblDataMouseClicked
+
+    private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
+        controller.insert(new String[]{""});
+    }//GEN-LAST:event_btnSimpanMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

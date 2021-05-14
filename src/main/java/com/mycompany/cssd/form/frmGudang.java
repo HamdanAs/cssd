@@ -5,17 +5,44 @@
  */
 package com.mycompany.cssd.form;
 
+import com.mycompany.cssd.utility.Table;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
 /**
  *
  * @author NESAS
  */
 public class frmGudang extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmGudang
-     */
+    private Table tblGudang;
+    
     public frmGudang() {
         initComponents();
+        
+        init();
+    }
+    
+    private void init(){
+//        JFrame
+        setLocationRelativeTo(null);
+        
+//        Cards reset
+        pnlSteril.setVisible(false);
+        pnlGudang.setVisible(false);
+        pnlSetAlat.setVisible(false);
+        pnlDipinjam.setVisible(false);
+        
+//        Variables
+        String[] gudangColumn = {"ID", "Nama Alat", "Stok"};
+//        Table
+        tblGudang = new Table(tblStokGudang);
+        tblGudang.setColumn(gudangColumn);
+        tblGudang.setColumnWidth(857, 10, 80, 10);
+    }
+
+    public JTable getTblStokGudang() {
+        return tblStokGudang;
     }
 
     /**
@@ -29,15 +56,22 @@ public class frmGudang extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         pnlNav = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSteril = new javax.swing.JButton();
+        btnGudang = new javax.swing.JButton();
+        btnListAlat = new javax.swing.JButton();
+        btnDipinjam = new javax.swing.JButton();
         pnlCards = new javax.swing.JPanel();
         pnlSteril = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         pnlGudang = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnTGudang = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStokGudang = new javax.swing.JTable();
         pnlSetAlat = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         pnlDipinjam = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -47,29 +81,49 @@ public class frmGudang extends javax.swing.JFrame {
 
         pnlNav.setBackground(new java.awt.Color(225, 241, 221));
 
-        jButton2.setBackground(new java.awt.Color(225, 241, 221));
-        jButton2.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(118, 97, 97));
-        jButton2.setText("STOK STRERIL");
-        jButton2.setBorder(null);
+        btnSteril.setBackground(new java.awt.Color(225, 241, 221));
+        btnSteril.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        btnSteril.setForeground(new java.awt.Color(118, 97, 97));
+        btnSteril.setText("STOK STRERIL");
+        btnSteril.setBorder(null);
+        btnSteril.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSterilMouseClicked(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(225, 241, 221));
-        jButton1.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(118, 97, 97));
-        jButton1.setText("STOK GUDANG");
-        jButton1.setBorder(null);
+        btnGudang.setBackground(new java.awt.Color(225, 241, 221));
+        btnGudang.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        btnGudang.setForeground(new java.awt.Color(118, 97, 97));
+        btnGudang.setText("STOK GUDANG");
+        btnGudang.setBorder(null);
+        btnGudang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGudangMouseClicked(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(225, 241, 221));
-        jButton3.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(118, 97, 97));
-        jButton3.setText("LIST SET ALAT");
-        jButton3.setBorder(null);
+        btnListAlat.setBackground(new java.awt.Color(225, 241, 221));
+        btnListAlat.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        btnListAlat.setForeground(new java.awt.Color(118, 97, 97));
+        btnListAlat.setText("LIST SET ALAT");
+        btnListAlat.setBorder(null);
+        btnListAlat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnListAlatMouseClicked(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(225, 241, 221));
-        jButton4.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(118, 97, 97));
-        jButton4.setText("ALAT DIPINJAM");
-        jButton4.setBorder(null);
+        btnDipinjam.setBackground(new java.awt.Color(225, 241, 221));
+        btnDipinjam.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        btnDipinjam.setForeground(new java.awt.Color(118, 97, 97));
+        btnDipinjam.setText("ALAT DIPINJAM");
+        btnDipinjam.setBorder(null);
+        btnDipinjam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDipinjamMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlNavLayout = new javax.swing.GroupLayout(pnlNav);
         pnlNav.setLayout(pnlNavLayout);
@@ -77,24 +131,24 @@ public class frmGudang extends javax.swing.JFrame {
             pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNavLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSteril, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGudang, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListAlat, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDipinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(197, Short.MAX_VALUE))
         );
         pnlNavLayout.setVerticalGroup(
             pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNavLayout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
+                    .addComponent(btnGudang)
+                    .addComponent(btnSteril)
+                    .addComponent(btnDipinjam)
+                    .addComponent(btnListAlat))
                 .addGap(33, 33, 33))
         );
 
@@ -105,60 +159,136 @@ public class frmGudang extends javax.swing.JFrame {
 
         pnlSteril.setBackground(new java.awt.Color(135, 167, 179));
 
+        jLabel2.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(225, 241, 221));
+        jLabel2.setText("STOK STERIL CSSD");
+        jLabel2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(225, 241, 221)));
+
         javax.swing.GroupLayout pnlSterilLayout = new javax.swing.GroupLayout(pnlSteril);
         pnlSteril.setLayout(pnlSterilLayout);
         pnlSterilLayout.setHorizontalGroup(
             pnlSterilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 877, Short.MAX_VALUE)
+            .addGroup(pnlSterilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlSterilLayout.setVerticalGroup(
             pnlSterilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(pnlSterilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(482, Short.MAX_VALUE))
         );
 
         pnlCards.add(pnlSteril, "card2");
 
         pnlGudang.setBackground(new java.awt.Color(135, 167, 179));
 
+        jLabel1.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(225, 241, 221));
+        jLabel1.setText("STOK GUDANG CSSD");
+        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(225, 241, 221)));
+
+        btnTGudang.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        btnTGudang.setForeground(new java.awt.Color(118, 97, 97));
+        btnTGudang.setText("Tambah ALat");
+        btnTGudang.setBorder(null);
+        btnTGudang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTGudangActionPerformed(evt);
+            }
+        });
+
+        tblStokGudang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblStokGudang);
+
         javax.swing.GroupLayout pnlGudangLayout = new javax.swing.GroupLayout(pnlGudang);
         pnlGudang.setLayout(pnlGudangLayout);
         pnlGudangLayout.setHorizontalGroup(
             pnlGudangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 877, Short.MAX_VALUE)
+            .addGroup(pnlGudangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlGudangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                    .addGroup(pnlGudangLayout.createSequentialGroup()
+                        .addComponent(btnTGudang, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         pnlGudangLayout.setVerticalGroup(
             pnlGudangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(pnlGudangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTGudang, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlCards.add(pnlGudang, "card2");
 
         pnlSetAlat.setBackground(new java.awt.Color(135, 167, 179));
 
+        jLabel3.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(225, 241, 221));
+        jLabel3.setText("LIST SET ALAT");
+        jLabel3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(225, 241, 221)));
+
         javax.swing.GroupLayout pnlSetAlatLayout = new javax.swing.GroupLayout(pnlSetAlat);
         pnlSetAlat.setLayout(pnlSetAlatLayout);
         pnlSetAlatLayout.setHorizontalGroup(
             pnlSetAlatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 877, Short.MAX_VALUE)
+            .addGroup(pnlSetAlatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlSetAlatLayout.setVerticalGroup(
             pnlSetAlatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(pnlSetAlatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(482, Short.MAX_VALUE))
         );
 
         pnlCards.add(pnlSetAlat, "card2");
 
         pnlDipinjam.setBackground(new java.awt.Color(135, 167, 179));
 
+        jLabel4.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(225, 241, 221));
+        jLabel4.setText("LIST SET ALAT DIPINJAM");
+        jLabel4.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(225, 241, 221)));
+
         javax.swing.GroupLayout pnlDipinjamLayout = new javax.swing.GroupLayout(pnlDipinjam);
         pnlDipinjam.setLayout(pnlDipinjamLayout);
         pnlDipinjamLayout.setHorizontalGroup(
             pnlDipinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 877, Short.MAX_VALUE)
+            .addGroup(pnlDipinjamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlDipinjamLayout.setVerticalGroup(
             pnlDipinjamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(pnlDipinjamLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(482, Short.MAX_VALUE))
         );
 
         pnlCards.add(pnlDipinjam, "card2");
@@ -169,6 +299,36 @@ public class frmGudang extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void toTop(JPanel target){
+        JPanel[] panels = {pnlSteril, pnlGudang, pnlSetAlat, pnlDipinjam};
+        
+        for(JPanel panel : panels){
+            panel.setVisible(false);
+        }
+        
+        target.setVisible(true);
+    }
+    
+    private void btnSterilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSterilMouseClicked
+        toTop(pnlSteril);
+    }//GEN-LAST:event_btnSterilMouseClicked
+
+    private void btnGudangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGudangMouseClicked
+        toTop(pnlGudang);
+    }//GEN-LAST:event_btnGudangMouseClicked
+
+    private void btnListAlatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListAlatMouseClicked
+        toTop(pnlSetAlat);
+    }//GEN-LAST:event_btnListAlatMouseClicked
+
+    private void btnDipinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDipinjamMouseClicked
+        toTop(pnlDipinjam);
+    }//GEN-LAST:event_btnDipinjamMouseClicked
+
+    private void btnTGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTGudangActionPerformed
+        
+    }//GEN-LAST:event_btnTGudangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,10 +366,16 @@ public class frmGudang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnDipinjam;
+    private javax.swing.JButton btnGudang;
+    private javax.swing.JButton btnListAlat;
+    private javax.swing.JButton btnSteril;
+    private javax.swing.JButton btnTGudang;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel pnlCards;
     private javax.swing.JPanel pnlDipinjam;
@@ -217,5 +383,6 @@ public class frmGudang extends javax.swing.JFrame {
     private javax.swing.JPanel pnlNav;
     private javax.swing.JPanel pnlSetAlat;
     private javax.swing.JPanel pnlSteril;
+    private javax.swing.JTable tblStokGudang;
     // End of variables declaration//GEN-END:variables
 }

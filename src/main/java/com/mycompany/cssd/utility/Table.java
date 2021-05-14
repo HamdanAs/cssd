@@ -50,4 +50,28 @@ public class Table {
     public void addRow(Object[] data){
         model.addRow(data);
     }
+    
+    public int getRowIndex(){
+        return table.getSelectedRow();
+    }
+    
+    public int getColumnIndex(){
+        return table.getSelectedColumn();
+    }
+    
+    public int getRowCount(){
+        return table.getRowCount();
+    }
+    
+    public int getColumnCount(){
+        return table.getColumnCount();
+    }
+    
+    public Object getColumnValue(int row, int column){
+        return model.getValueAt(row, column);
+    }
+    
+    public void removeRow(int row){
+        model.removeRow(row);
+    }
 }

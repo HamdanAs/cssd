@@ -1,9 +1,9 @@
 package com.mycompany.cssd.models;
 
 import com.mycompany.cssd.database.Database;
+import com.mycompany.cssd.utility.Table;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,8 +20,6 @@ public class Model {
         try {
             String questionMark = "?";
             db = new Database();
-
-            System.out.println(Arrays.toString(this.fillables));
             
             for (String fillable : this.fillables) {
                 questionMark += ",?";
@@ -40,6 +38,43 @@ public class Model {
             stmt.execute();
 
             db.getConn().close();
+
+            return 1;
+        } catch (SQLException e){
+            return 0;
+        }
+    }
+    
+    public int saveBatch(Table table){
+        try {
+            String questionMark = "?";
+            db = new Database();
+            
+            for (int i = 0; i < this.fillables.length - 1; i++) {
+                questionMark += ",?";
+            }
+
+            String query = "insert into " + table + " values(" + questionMark + ")";
+            System.out.println(query);
+            db.query(query);
+            PreparedStatement stmt = db.getStmt();
+
+            for (int i = 1; i <= this.fillables.length; i++){
+                for(int j = 0; j < table.getRowCount(); j++){
+                    String[] tableData = new String[table.getRowCount()];
+                    
+                    for(int k = 0; i < table.getColumnCount(); k++){
+                        tableData[i] = (String) table.getColumnValue(j, k);
+                    }
+                    
+                    stmt.setString(i, tableData[i - 1]);
+                    stmt.addBatch();
+                }
+            }
+
+            stmt.executeBatch();
+
+            db.getConn().commit();
 
             return 1;
         } catch (SQLException e){

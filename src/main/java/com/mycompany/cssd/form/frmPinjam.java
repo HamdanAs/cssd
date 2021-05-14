@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,21 +50,6 @@ public class frmPinjam extends javax.swing.JFrame{
 //        db.query("select idbarang, namabarang, jenis from stokgudang");
 //        table.addRow(db.resultSet());
          
-        showAll();
-    }
-    
-    private void showAll() throws SQLException{
-        db = new Database();
-        db.query("select idbarang, namabarang, jenis from stokgudang");
-        rs = db.execute();
-        
-        while(rs.next()){
-            Object[] data = new Object[3];
-            data[0] = rs.getInt("idbarang");
-            data[1] = rs.getString("namabarang");
-            data[2] = rs.getString("jenis");
-            table.addRow(data);
-        }
     }
     
     private void addRow(){
@@ -163,8 +149,27 @@ public class frmPinjam extends javax.swing.JFrame{
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblData);
+        if (tblData.getColumnModel().getColumnCount() > 0) {
+            tblData.getColumnModel().getColumn(0).setResizable(false);
+            tblData.getColumnModel().getColumn(1).setResizable(false);
+            tblData.getColumnModel().getColumn(2).setResizable(false);
+            tblData.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         tNoPeminjaman.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         tNoPeminjaman.setForeground(new java.awt.Color(118, 97, 97));
@@ -316,6 +321,10 @@ public class frmPinjam extends javax.swing.JFrame{
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         
     }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
+        table.removeRow(table.getRowIndex());
+    }//GEN-LAST:event_tblDataMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

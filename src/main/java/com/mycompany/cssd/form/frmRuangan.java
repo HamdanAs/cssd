@@ -40,7 +40,7 @@ public class frmRuangan extends javax.swing.JFrame {
         table.setColumnWidth(742, 10, 70, 20);
     
 //    Controller
-        Controller controller = new RuanganController(tblData, table);
+        Controller controller = new RuanganController(table);
         controller.showAll();
     }
 

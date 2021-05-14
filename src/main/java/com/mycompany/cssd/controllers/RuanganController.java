@@ -16,8 +16,7 @@ public class RuanganController implements Controller{
     
     private Database db;
     
-    public RuanganController(JTable jTable, Table table) throws SQLException {
-        this.jTable = jTable;
+    public RuanganController(Table table) throws SQLException {
         this.table = table;
         this.db = new Database();
     }
